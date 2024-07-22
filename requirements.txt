@@ -2,4 +2,4 @@ Flask
 Gunicorn
 Keras
 Pillow
-Tensorflow-cpu
+Tensorflow-cpu==2.12.0
