@@ -14,7 +14,16 @@
         </form>
 
         {% if prediction %}
-            <p class="text-center"> Image is a {{ prediction }} with confidence {{ confidence }}</p>
+            <p class="text-center"> 預測結果： {{ prediction }}</p>
+            <p class="text-center"> 信心程度： {{ confidence }}</p>
         {% endif %}
+
+        {% if img_resized %}
+            <h3 class="text-center">Processed Image:</h3>
+            <div class="text-center">
+                <img src="{{ img_resized }}" alt="Processed Image" class="img-fluid">
+            </div>
+        {% endif %}
+
     </body>
 </html>
