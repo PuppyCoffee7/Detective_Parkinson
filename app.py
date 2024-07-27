@@ -26,7 +26,7 @@ def predict():
     np.set_printoptions(suppress=True)
 
     # Load the model
-    model = load_model("keras_model_200epoch.h5")
+    model = load_model("keras_model_500epoch_bo_7525_11.h5")
 
     # Load the labels
     try:
@@ -59,10 +59,14 @@ def predict():
     # Predicts the model
     prediction = model.predict(data)
     index = np.argmax(prediction)
-    class_name = class_names[index].strip()
+    class_name = class_names[index].strip("01 ")
     confidence_score = prediction[0][index]
+    if "Healthy" in class_name:
+        zh_tw_class_name="健康"
+    else:
+        zh_tw_class_name="有帕金森風險"
 
-    return render_template('index.html', prediction=class_name, confidence=confidence_score)
+    return render_template('index.html', prediction=zh_tw_class_name, confidence=confidence_score)
 
 
 
