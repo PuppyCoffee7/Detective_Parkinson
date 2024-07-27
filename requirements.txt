@@ -3,4 +3,3 @@ Gunicorn
 Keras
 Pillow
 Tensorflow-cpu==2.12.0
-opencv-python
