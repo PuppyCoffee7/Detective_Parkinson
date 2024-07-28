@@ -12,14 +12,25 @@
             <div class="mb-3">
                 <input class="form-control" type="file" name="imagefile">
             </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <input class="btn btn-primary mt-3" type="submit" value="Predict Image">
+            <div class="d-grid gap-2 col-md-6 col-lg-4 mx-auto">
+                <input class="btn btn-primary mt-3" type="submit" value="預測請按我">
             </div>
         </form>
+        <div class="prediction-space" style="min-height: 100px;">
         {% if prediction %}
             <p class="text-center mt-4">預測結果：{{ prediction }}</p>
             <p class="text-center">信心程度：{{ confidence }}</p>
         {% endif %}
+        </div>
+    </div>
+    <div>
+        <p class="text-center">使用教學影片</p>
+
+    <p style="text-align:center;">
+        <iframe width="420" height="315" align="middle"
+        src="https://www.youtube.com/embed/zAASDbE7JMI?si=6RAQ2FzsBm0OrCgx"  allowFullScreen>
+        </iframe>
+        </p>
     </div>
 </body>
 </html>
