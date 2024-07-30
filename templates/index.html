@@ -4,32 +4,50 @@
     <title>帕金森偵探 Detective Parkinson</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .loading-message {
+            display: none; 
+        }
+        .btn-large {
+            height: 60px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function showLoadingMessage() {
+            document.getElementById('loading-message').style.display = 'block';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1 class="text-center my-4">帕金森偵探 Detective Parkinson</h1>
-        <form class="p-3 text-center" action="/" method="post" enctype="multipart/form-data">
+        <form class="p-3 text-center" action="/" method="post" enctype="multipart/form-data" onsubmit="showLoadingMessage()">
             <div class="mb-3">
                 <input class="form-control" type="file" name="imagefile">
             </div>
             <div class="d-grid gap-2 col-md-6 col-lg-4 mx-auto">
-                <input class="btn btn-primary mt-3" type="submit" value="預測請按我">
+                <input class="btn btn-primary mt-3 btn-large" type="submit" value="分析請按我">
             </div>
         </form>
-        <div class="prediction-space" style="min-height: 100px;">
-        {% if prediction %}
-            <p class="text-center mt-4">預測結果：{{ prediction }}</p>
-            <p class="text-center">信心程度：{{ confidence }}</p>
-        {% endif %}
+        <div id="loading-message" class="text-center text-primary loading-message">
+            分析中，請稍等...
+        </div>
+        <div style="min-height: 100px;">
+            {% if prediction == "nofile" %}
+                <p style="font-size:30px;" class="text-center mt-4">請輸入圖片！</p>
+            {% elif prediction %}
+                <p style="font-size:30px;" class="text-center">分析結果：{{ prediction }}</p>
+                <p style="font-size:30px;" class="text-center">信心程度：{{ confidence }}</p>
+            {% endif %}
         </div>
     </div>
     <div>
-        <p class="text-center">操作教學影片</p>
-
+        <p style="font-size:20px;" class="text-center">操作教學影片</p>
         <p style="text-align:center;">
-        <iframe width="420" height="315" align="middle"
-        src="https://www.youtube.com/embed/zAASDbE7JMI?si=6RAQ2FzsBm0OrCgx"  allowFullScreen>
-        </iframe>
+            <iframe width="420" height="315" align="middle"
+            src="https://www.youtube.com/embed/zAASDbE7JMI?si=6RAQ2FzsBm0OrCgx" allowFullScreen>
+            </iframe>
         </p>
     </div>
 </body>
