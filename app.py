@@ -25,7 +25,7 @@ def predict():
     np.set_printoptions(suppress=True)
 
     #加載模型
-    model = load_model("keras_model_500epoch_bo_7525.h5")
+    model = load_model("keras_model_500epoch_bo_7525.h5",compile=False)
 
     #加載標籤
     try:
