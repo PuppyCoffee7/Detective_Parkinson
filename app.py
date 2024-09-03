@@ -13,9 +13,6 @@ from flask import Flask, render_template, request
 from keras.models import load_model
 from PIL import Image, ImageOps, UnidentifiedImageError
 import numpy as np
-import cv2
-import base64
-from io import BytesIO
 
 
 app = Flask(__name__)
