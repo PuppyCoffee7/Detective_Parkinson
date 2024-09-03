@@ -4,11 +4,19 @@ Created on Mon Jul 22 21:10:37 2024
 
 @author: minec
 """
+# 參考資料：
+# 模型運用程式碼：https://github.com/googlecreativelab/teachablemachine-community/blob/master/snippets/markdown/image/tensorflow/keras.md
+# flask相關程式碼：https://youtu.be/0nr6TPKlrN0?si=dacWvQYE3XB-kInh
+
 
 from flask import Flask, render_template, request
 from keras.models import load_model
 from PIL import Image, ImageOps, UnidentifiedImageError
 import numpy as np
+import cv2
+import base64
+from io import BytesIO
+
 
 app = Flask(__name__)
 
@@ -21,7 +29,7 @@ def predict():
     #圖像輸入
     imagefile = request.files['imagefile']
 
-    #禁用科學記號以提高清晰度
+    #禁用科學記號
     np.set_printoptions(suppress=True)
 
     #加載模型
@@ -43,6 +51,13 @@ def predict():
         image = Image.open(imagefile).convert("RGB")
     except UnidentifiedImageError:
         return render_template('index.html', prediction="nofile", confidence=None)
+
+
+    # 將圖像轉換為灰階
+    image = ImageOps.grayscale(image)
+
+    # 將灰階圖像轉換為RGB格式（以便模型接受輸入）
+    image = ImageOps.colorize(image, black="black", white="white")
 
     #將圖像調整到至少224x224，然後從中心裁剪
     size = (224, 224)
@@ -67,6 +82,7 @@ def predict():
         zh_tw_class_name = "健康"
     else:
         zh_tw_class_name = "有帕金森風險"
+
 
     return render_template('index.html', prediction=zh_tw_class_name, confidence=confidence_score_per)
 
