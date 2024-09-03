@@ -20,6 +20,7 @@
     <script>
         function showLoadingMessage() {
             document.getElementById('loading-message').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
         }
     </script>
 </head>
@@ -37,7 +38,7 @@
         <div id="loading-message" class="text-center text-primary loading-message">
             分析中，請稍等...
         </div>
-        <div style="min-height: 100px;">
+        <div id="result" style="min-height: 100px;">
             {% if prediction == "nofile" %}
                 <p style="font-size:30px;" class="text-center mt-4">請輸入圖片！</p>
             {% elif prediction %}
